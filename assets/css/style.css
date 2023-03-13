@@ -1,0 +1,19 @@
+
+body{
+
+
+
+}
+
+
+header{
+    display:flex;
+    justify-content: space-evenly;
+
+}
+
+.main-content{
+    border-style: solid;
+
+}
+
