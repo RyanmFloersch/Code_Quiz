@@ -19,6 +19,11 @@ var question;
 var count = 60;
 
 
+function checkAnswer(){
+
+    console.log(this);
+
+}
 
 
 function displayQuestion(){
@@ -42,22 +47,21 @@ function displayQuestion(){
 
 
 
-    // var choice1 = document.createElement('button');
-    // var choice2 =  document.createElement('button');
-    // var choice3 =  document.createElement('button');
-    // var choice4 =  document.createElement('button');
-
-    // quizDisplay.append(choice1);
-    // quizDisplay.append(choice2);
-    // quizDisplay.append(choice3);
-    // quizDisplay.append(choice4);    
-
-
-
 }
 
-function startTimer(){
-    
+// Countdown for the timer
+function countDown() {
+
+    var count = 60;
+    var timer = setInterval(function () {
+        count--;
+        countDownDisplay.innerText = "Time: " + count;
+
+        if (!count) {
+            alert("Times up");
+            clearInterval(timer);
+        }
+    }, 1000);
 
 }
 
@@ -66,7 +70,7 @@ function startQuiz(){
     mainHeader.classList.add('hide');
     startText.classList.add('hide');
     startButton.classList.add('hide');
-
+    countDown();
     displayQuestion();
 
 
@@ -77,7 +81,7 @@ function startQuiz(){
 
 
 startButton.addEventListener('click', startQuiz);
-quizDisplay.addEventListener('click', displayQuestion);
+quizDisplay.addEventListener('click', checkAnswer);
 
 
 
