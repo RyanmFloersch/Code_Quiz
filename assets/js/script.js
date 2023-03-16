@@ -21,7 +21,7 @@ var count = 60;
 
 function checkAnswer(){
 
-    console.log(this);
+    console.log();
 
 }
 
@@ -45,6 +45,7 @@ function displayQuestion(){
     choice4.innerText = question.ans4;
     choice4.classList.remove('hide');
 
+    
 
 
 }
