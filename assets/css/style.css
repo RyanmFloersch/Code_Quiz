@@ -13,6 +13,8 @@ header{
 
 }
 
+
+
 .highscore{
     display: block;
 }
@@ -75,4 +77,21 @@ header{
     color: red;
     width: 10%;
     height: 10%;
+}
+
+
+
+.result {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.result div{
+    
+}
+
+
+.result textarea{
+    resize: none;
+    width: auto;
 }
