@@ -29,7 +29,7 @@ var questionArray = [
         ans2: "2. string",
         ans3: "3. number",
         ans4: "4. undefined",
-        correctAnswer: "1. boolean",
+        correctAnswer: "1",
 
     },
     {
@@ -39,11 +39,12 @@ var questionArray = [
         ans2: "2. Document Object Model",
         ans3: "3. Dodging Oncoming Motorcyles",
         ans4: "4. Deep Ocean Maintainance",
-        correctAnswer: "2. Document Object Model",
+        correctAnswer: "2",
 
         
     }
 ];
+
 
 
 function setTimer() {
@@ -62,6 +63,34 @@ function getObjectPropNumber(obj){
     }
     return count;
 }
+
+// Function that reveals the questions by adding the show class and removing the hide
+// class from the elements in the optionDisplay section of the html.   
+function displayQuestion(questionNumber){
+    
+
+    var answerOptions = optionDisplay.children;
+   
+   for(el of answerOptions){
+       if(el.dataset.questionIndex == questionNumber){
+           el.classList.remove("hide");
+           el.classList.add("show");
+       }
+   }
+
+}
+// Function that hides the questions by removing the show class and adding the hide
+// class from the elements in the optionDisplay section of the html.  
+function hideQuestion(questionNumber){
+   var answerOptions = optionDisplay.children;
+   for(el of answerOptions){
+       if(el.dataset.questionIndex == questionNumber){
+           el.classList.remove("show");
+           el.classList.add("hide");
+       }
+   }
+}
+
 
 //Helper function to hud elements
 // Pass in an aray consisting of html elements and it will set their display to none
@@ -165,7 +194,7 @@ function genResultScreen(){
     var h3 = document.createElement('h3');
     var div = document.createElement('div');
     var p = document.createElement('p');
-    var textField = document.createElement("textarea");
+    var initials = document.createElement("textarea");
     var button = document.createElement('button');
 
     h2.innerText = 'All done!';
@@ -174,66 +203,42 @@ function genResultScreen(){
     button.innerText = "Submit";
 
 
+    resultDisplay.append(h2);
+    resultDisplay.append(h3);
+    resultDisplay.append(p);
+    resultDisplay.append(initials);
+    resultDisplay.append(button);
+
+    resultDisplay.classList.add("hide");
 
 
-    mainDisplay.append(h2);
-    mainDisplay.append(h3);
-    div.append(p);
-    div.append(textField);
-    div.append(button);
-    div.style.flexDirection ="row";
-    mainDisplay.append(div);
+    //Origianl code 
+    // mainDisplay.append(h2);
+    // mainDisplay.append(h3);
+    // div.append(p);
+    // div.append(initials);
+    // div.append(button);
+    // div.style.flexDirection ="row";
+    // mainDisplay.append(div);
 
     // div.classList.add('result');
-    var elArray = [h2,h3,div,p,textField,button];
+    // var elArray = [h2,h3,div,p,initials,button];
 
-    for(var i = 0; i< elArray.length; i++){
-        elArray[i].classList.add('result');
-        // elArray[i].classList.add('hide');
-    }
-    hideElements(mainDisplay.querySelectorAll('.result'));
-
-    // for(el of elArray){
-    //     el.dataset.screen = "resultScreen" ;
-    //     el.classList.add('hide') ;
-    //     console.log(el);
-
+    // for(var i = 0; i< elArray.length; i++){
+    //     elArray[i].classList.add('result');
+    //     // elArray[i].classList.add('hide');
     // }
+    // hideElements(mainDisplay.querySelectorAll('.result'));
 
 
 
 
-}
-
-
-
-
-// Function that reveals the questions by adding the show class and removing the hide
-// class from the elements in the optionDisplay section of the html.   
-function displayQuestion(questionNumber){
-    
-
-     var answerOptions = optionDisplay.children;
-    
-    for(el of answerOptions){
-        if(el.dataset.questionIndex == questionNumber){
-            el.classList.remove("hide");
-            el.classList.add("show");
-        }
-    }
 
 }
-// Function that hides the questions by removing the show class and adding the hide
-// class from the elements in the optionDisplay section of the html.  
-function hideQuestion(questionNumber){
-    var answerOptions = optionDisplay.children;
-    for(el of answerOptions){
-        if(el.dataset.questionIndex == questionNumber){
-            el.classList.remove("show");
-            el.classList.add("hide");
-        }
-    }
-}
+
+
+
+
 
 
 
@@ -245,7 +250,7 @@ function resultScreen(score){
     //     console.log(resultElements[i]);
     // }
     // revealElements(resultElements);
-
+    resultDisplay.classList.remove("hide");
 
     var h2 = resultElements[0];
     var h3 = resultElements[1];
