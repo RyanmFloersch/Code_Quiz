@@ -52,10 +52,30 @@ header{
     
 }
 
-
-
 .quiz-display{
+    display: flex;
+    flex-direction: column;
     margin: 0 0 20px 0 ;
+    justify-content: start;
+    
+}
+
+.quiz-display button{
+    background-color: rgb(94, 238, 238);
+    padding: 10px 0;
+    /* width: 10px; */
+    min-width: 150px;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin: 15px 80rem 0 10rem;
+    border: solid teal;
+
+
+}
+
+.quiz-display button:hover{
+    background-color: rgb(142, 201, 201);
+    
 }
 
 
