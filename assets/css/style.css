@@ -6,14 +6,73 @@ body{
 }
 
 
+
 header{
     display:flex;
     justify-content: space-evenly;
 
 }
 
+.highscore{
+    display: block;
+}
+
+.timer{
+    display: block;
+    
+}
+
+
+
 .main-content{
     border-style: solid;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+ 
+}
+
+.main-content p{
+    align-self: center;
+}
+
+
+
+.question-text{
+    font-weight: bold;
+    text-align: center;
+}
+
+.hide{
+    display: none;
+}
+.show{
+    display: flex;
+}
+
+.option-buttons{
+
+    flex-direction: column;
+    justify-content: center;    
 
 }
 
+.option-buttons button{
+
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    margin: 5px;
+    position: relative;
+    left: 10%;
+}
+
+
+
+.start-button{
+    align-self: center;
+    margin: 10%;
+    color: red;
+    width: 10%;
+    height: 10%;
+}
