@@ -20,6 +20,8 @@ var resultDisplay = document.querySelector(".result");
 //     correctIndex: 0
 // }
 
+
+
 // An array of objects containing the questions
 var questionArray = [
     {
