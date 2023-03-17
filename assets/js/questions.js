@@ -1,8 +1,7 @@
 // An array of objects containing the questions
 var questions = [
     {
-        question: "What data type only has the values true and false?",
-        // questionNumber: 1,
+        questionText: "What data type only has the values true and false?",
         ans1: "1. boolean",
         ans2: "2. string",
         ans3: "3. number",
@@ -11,8 +10,7 @@ var questions = [
 
     },
     {
-        question: "What does the DOM stand for?",
-        // questionNumber: 2,
+        questionText: "What does the DOM stand for?",
         ans1: "1. Dominoe On Marketplace",
         ans2: "2. Document Object Model",
         ans3: "3. Dodging Oncoming Motorcyles",

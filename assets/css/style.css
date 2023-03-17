@@ -28,22 +28,27 @@ header{
 }
 
 
-
+button{
+    background-color: rgb(94, 238, 238);
+    font-size: 1rem;
+    border-radius: 10px;
+    border: solid teal;
+}
 
 /*** CUSTOM STYLES ***/
 
 .main-header{
     margin: 45px 0 25px;
+
+}
+.quiz-wrap #start-text{
+    word-wrap: break-word;
 }
 
 .quiz-wrap #start{
-    background-color: rgb(94, 238, 238);
     padding: 10px 0;
     min-width: 150px;
-    font-size: 1rem;
-    border-radius: 10px;
     margin: 15px 0 0 0;
-    border: solid teal;
     
 }
 
@@ -61,14 +66,10 @@ header{
 }
 
 .quiz-display button{
-    background-color: rgb(94, 238, 238);
     padding: 10px 0;
-    /* width: 10px; */
     min-width: 150px;
-    font-size: 1rem;
-    border-radius: 10px;
+    width: auto;
     margin: 15px 80rem 0 10rem;
-    border: solid teal;
 
 
 }
@@ -76,6 +77,61 @@ header{
 .quiz-display button:hover{
     background-color: rgb(142, 201, 201);
     
+}
+
+.result-Display{
+
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+
+.result-Display textarea{
+    
+    min-width: 160px;
+    margin: 10px ;
+    resize: none;
+    text-align: center;
+    font-size: 20px;
+}
+.result-Display button{
+    padding: 10px 0;
+    min-width: 150px;
+    margin: 10px ;
+}
+
+.result-Display button:hover{
+    background-color: rgb(142, 201, 201);
+    
+}
+
+.high-score-display{
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.high-score-display textarea{
+    min-width: 160px;
+    margin: 10px ;
+    resize: none;
+    text-align: center;
+    background-color: white;
+    font-size: 20px;
+    margin: 20px;
+}
+
+.high-score-display button{
+    padding: 10px 0;
+    min-width: 150px;
+    margin: 10px;
+
+}
+
+.high-score-display button:hover{
+    background-color: rgb(142, 201, 201);   
 }
 
 
