@@ -96,9 +96,37 @@ function displayHighScoreScreen() {
     clearHighScoreBtn.innerText = "Clear High Scores";
     highScoreScreen.style.display = "flex";
 
-    scores.innerText = initials + " - " + count;
+    // scores.innerText = initials + " - " + count;
+    var scoresFromLocal = [];
+    var localKeys = [];
+    var pairs =[];
 
+    for(var i=0;i<localStorage.length; i++){
+        var storedScore = localStorage.getItem(localStorage.key(i));
+        var name = localStorage.key(i);        
+        // console.log("i "+name +" "+ storedScore);
+        scoresFromLocal.push(storedScore);
+        localKeys.push(name);
+        pairs.push({playerName: name, playerScore:storedScore});
+    }
+    var sortedScore = scoresFromLocal.sort();
+    var rankings = ''; 
+    
+    for(var i=0;i<sortedScore.length;i++){
 
+        for(var j=0; j<pairs.length; j++){
+            if(pairs[j].playerScore === sortedScore[i]){
+                console.log("reach");
+
+                // console.log((sortedScore.length - i) + pairs[j].playerName + ": "+ pairs[j].playerScore);
+                scores.value +=" "+ (sortedScore.length - i)+ ". " + pairs[j].playerName + ": "+ pairs[j].playerScore + "\r\n " ;
+                console.log(rankings);
+                break;
+            }
+        }
+    }
+    
+    // scores.innerText = rankings;
 
 }
 
@@ -195,12 +223,14 @@ function startQuiz() {
 }
 
 function init() {
-
+    
     currentQuestionIndex = 0;
     count = 60;
     isDone = false;
     numCorrect = 0;
     question = questions[currentQuestionIndex];
+    var textArea = highScoreScreen.querySelector('textarea');
+    textArea.value = "";
 
     quizWrap.classList.remove('hide');
     mainHeader.classList.remove('hide');

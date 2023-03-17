@@ -116,8 +116,8 @@ button{
 .high-score-display textarea{
     min-width: 160px;
     margin: 10px ;
-    resize: none;
-    text-align: center;
+    height: 150px;
+    resize: none;    
     background-color: white;
     font-size: 20px;
     margin: 20px;
