@@ -1,97 +1,152 @@
 
-body{
 
-
-
+/*** RESETS ***/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-color:cadetblue;
 }
-
-
 
 header{
-    display:flex;
-    justify-content: space-evenly;
-
-}
-
-
-
-.highscore{
-    display: block;
-}
-
-.timer{
-    display: block;
-    
-}
-
-
-
-.main-content{
-    border-style: solid;
     display: flex;
-    flex-direction: column;
-    align-content: center;
- 
-}
-
-.main-content p{
-    align-self: center;
+    justify-content: space-between;
+    border: 0 none;
+    margin: 25px;
 }
 
 
-
-.question-text{
-    font-weight: bold;
+/*** GLOBAL CLASSES***/
+.text-center{
     text-align: center;
+    
 }
 
 .hide{
     display: none;
 }
-.show{
-    display: flex;
+
+
+button{
+    background-color: rgb(94, 238, 238);
+    font-size: 1rem;
+    border-radius: 10px;
+    border: solid teal;
 }
 
-.option-buttons{
+/*** CUSTOM STYLES ***/
 
-    flex-direction: column;
-    justify-content: center;    
+.main-header{
+    margin: 45px 0 25px;
 
 }
-
-.option-buttons button{
-
-    width: auto;
-    height: auto;
-    flex-direction: column;
-    margin: 5px;
-    position: relative;
-    left: 10%;
+.quiz-wrap #start-text{
+    word-wrap: break-word;
 }
 
-
-
-.start-button{
-    align-self: center;
-    margin: 10%;
-    color: red;
-    width: 10%;
-    height: 10%;
-}
-
-
-
-.result {
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.result div{
+.quiz-wrap #start{
+    padding: 10px 0;
+    min-width: 150px;
+    margin: 15px 0 0 0;
     
 }
 
-
-.result textarea{
-    resize: none;
-    width: auto;
+.quiz-wrap #start:hover{
+    background-color: rgb(142, 201, 201);
+    
 }
+
+.quiz-display{
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 20px 0 ;
+    justify-content: start;
+    
+}
+
+.quiz-display button{
+    padding: 10px 0;
+    min-width: 150px;
+    width: auto;
+    margin: 15px 80rem 0 10rem;
+
+
+}
+
+.quiz-display button:hover{
+    background-color: rgb(142, 201, 201);
+    
+}
+
+.result-Display{
+
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+
+.result-Display textarea{
+    
+    min-width: 160px;
+    margin: 10px ;
+    resize: none;
+    text-align: center;
+    font-size: 20px;
+}
+.result-Display button{
+    padding: 10px 0;
+    min-width: 150px;
+    margin: 10px ;
+}
+
+.result-Display button:hover{
+    background-color: rgb(142, 201, 201);
+    
+}
+
+.high-score-display{
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.high-score-display textarea{
+    min-width: 160px;
+    margin: 10px ;
+    resize: none;
+    text-align: center;
+    background-color: white;
+    font-size: 20px;
+    margin: 20px;
+}
+
+.high-score-display button{
+    padding: 10px 0;
+    min-width: 150px;
+    margin: 10px;
+
+}
+
+.high-score-display button:hover{
+    background-color: rgb(142, 201, 201);   
+}
+
+
+
+/*** RESPONSIVE STYLES ***/
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,26 +12,44 @@
 <body>
 
     <header>
-        <h4 class="highScore">View high scores</h4>
-        <h4 class="timer">Time: </h4>
+        <h4 id="highScore">View high scores</h4>
+        <h4 id="timer">Time: 60</h4>
     </header>
 
-    <section class="main-content">
+    <h1 class="main-header text-center hide">Placeholder</h1>
 
-        <!-- Initial HTML code-->
-        
+    <section class = "quiz-wrap text-center " >
+        <h4 id="startText" >Intro text here</h4>
+        <button id="start" >Start</button>
 
-        
-        <h1 class="question-text start-screen">Placeholder</h1>
-        <p class="start-screen">Welcome to the quiz and here is some placeholder text for now.</p>
-        
-        <div class="option-buttons">          
+        <h3 id = 'questionDisplay' ></h3>
+        <div class = "quiz-display ">
+            <button id="choice1" class="hide"></button>
+            <button id="choice2" class="hide"></button>
+            <button id="choice3" class="hide"></button>
+            <button id="choice4" class="hide"></button>
         </div>
 
-        <button class="start-button start-screen">Start</button>
-        <h4 class="result"></h4>
+        <div class = "result-Display hide">
+            <h2></h2>
+            <h3></h3>
+            <textarea></textarea>
+            <button></button>
+        </div>
+        
+
+        <div class="high-score-display hide" >
+            <h2></h2>
+            <textarea readonly></textarea>
+            <button id="goBackBtn"></button>
+            <button id="clearHighScoreBtn"></button>
+        </div>
+
+        <h4 id="result" class="hide"></h4>
+
     </section>
 
+    <script src="assets/js/questions.js"></script>
     <script src="assets\js\script.js"></script>
 </body>
 

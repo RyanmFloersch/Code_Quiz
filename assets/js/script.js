@@ -1,89 +1,161 @@
+var mainHeader = document.querySelector('.main-header');
+var countDownDisplay = document.querySelector("#timer");
+var goToHighScore = document.querySelector('#highScore');
+var startText = document.querySelector('#startText');
+var startButton = document.querySelector("#start");
+var questionDisplay = document.querySelector("#questionDisplay");
+var quizWrap = document.querySelector('.quiz-wrap');
+var quizDisplay = document.querySelector(".quiz-display");
+var choices = quizDisplay.querySelectorAll('button');
+var choice1 = document.querySelector('#choice1');
+var choice2 = document.querySelector('#choice2');
+var choice3 = document.querySelector('#choice3');
+var choice4 = document.querySelector('#choice4');
+var resultDisplay = document.querySelector(".result-Display");
+var questionResult = document.querySelector('#result');
+var initialArea = resultDisplay.querySelector('textarea');
+// var resultSubmit = resultDisplay.querySelector('button');
+var highScoreScreen = document.querySelector('.high-score-display');
+var goBackBtn = highScoreScreen.querySelector('#goBackBtn');
+var clearHighScoreBtn = highScoreScreen.querySelector('#clearHighScoreBtn');
 
-var mainDisplay = document.querySelector(".main-content");
-var startButton = document.querySelector(".start-button");
-var startingElements = document.querySelectorAll(".start-screen");
-var countDownDisplay = document.querySelector(".timer");
-var optionDisplay = document.querySelector(".option-buttons ");
-var resultDisplay = document.querySelector(".result");
+var numberOfTimiesIn = 0;
+
+var currentQuestionIndex = 0;
+var question = {};
+var count = 60;
+var isDone = false;
+var numCorrect = 0;
+var initials;
 
 
-// Old question object
-// {
-//     text: "What data type only has the values true and false?",
-//     choices: [
-//         "boolean",
-//         "string",
-//         "number",
-//         "undefined"
-//     ],
-//     // The index of the question in the questions array
-//     correctIndex: 0
-// }
+function displayResult(result) {
 
+    questionResult.classList.remove('hide');
+    var el = questionResult;
 
+    if (result) {
+        el.innerText = "Correct!";
 
-// An array of objects containing the questions
-var questionArray = [
-    {
-        question: "What data type only has the values true and false?",
-        // questionNumber: 1,
-        ans1: "1. boolean",
-        ans2: "2. string",
-        ans3: "3. number",
-        ans4: "4. undefined",
-        correctAnswer: "1. boolean",
-
-    },
-    {
-        question: "What does the DOM stand for?",
-        // questionNumber: 2,
-        ans1: "1. Dominoe On Marketplace",
-        ans2: "2. Document Object Model",
-        ans3: "3. Dodging Oncoming Motorcyles",
-        ans4: "4. Deep Ocean Maintainance",
-        correctAnswer: "2. Document Object Model",
-
-        
+    } else {
+        el.innerText = "Incorrect!";
+        count -= 10;
     }
-];
+    var opacity = 1;
 
+    setInterval(function () {
+        if (opacity > 0) {
+            opacity -= 0.1;
+            el.style.opacity = opacity;
+        }
 
-function setTimer() {
-    countDownDisplay.innerText = "Timer: 60";
+    }, 500);
+
 }
 
-function setHeader() {
-    questionDisplay = "Welcome to the quiz";
 
-}
-// helper function to quickly get an objects number of properties
-function getObjectPropNumber(obj){
-    var count= 0;
-    for (key in obj) {
-        count++;
+
+function checkAnswer(clickedBtn) {
+    numberOfTimiesIn++;
+    console.log(numberOfTimiesIn);
+    if (clickedBtn.dataset.index === question.correctAnswer) {
+        console.log('correct');
+        currentQuestionIndex++;
+        numCorrect++;
+        displayResult(true);
+
+    } else {
+        console.log('incorrect');
+        currentQuestionIndex++;
+        displayResult(false);
     }
-    return count;
-}
 
-//Helper function to hud elements
-// Pass in an aray consisting of html elements and it will set their display to none
-// The parameter cannot be empty and must be an iterable array of html elements.
-function hideElements(elArray){
-    
-    for(child of elArray ){
-        child.style.display = 'none';
-    }
-}
-// Reveals hidden elements but only sets them to inline. 
-function revealElements(elArray){
-    
-    for(child of elArray ){
-        child.style.display = 'inline';
+    if (currentQuestionIndex === questions.length) {
+
+        questionDisplay.classList.add('hide');
+        quizDisplay.classList.add('hide');
+
+        for (btns of choices) {
+            btns.classList.add('hide');
+        }
+        displayResultScreen();
+    } else {
+
+        displayQuestion();
     }
 }
 
+function displayHighScoreScreen() {
+
+    highScoreScreen.classList.remove('hide');
+    var h2 = highScoreScreen.querySelector('h2');
+    var scores = highScoreScreen.querySelector('textArea');
+    h2.innerText = "High Score";
+    goBackBtn.innerText = "Go Back";
+    clearHighScoreBtn.innerText = "Clear High Scores";
+    highScoreScreen.style.display = "flex";
+
+    scores.innerText = initials + " - " + numCorrect;
 
 
+
+}
+
+
+
+function displayResultScreen() {
+    isDone = true;
+    resultDisplay.classList.remove('hide');
+    resultDisplay.style.display = 'flex';
+
+
+    var h2 = resultDisplay.querySelector('h2');
+    var h3 = resultDisplay.querySelector('h3');
+    var textArea = initialArea;
+    var submit = resultDisplay.querySelector('button');
+
+    h2.innerText = "All done!";
+    h3.innerText = "Enter initials: ";
+    submit.innerText = 'Submit';
+
+    submit.addEventListener('click', function () {
+        if (textArea) {
+            initials = initialArea.value;
+            localStorage.setItem(initialArea.value, JSON.stringify(numCorrect));
+            resultDisplay.classList.add('hide');
+            resultDisplay.style.display = "none";
+            displayHighScoreScreen();
+
+
+        } else {
+            console.log("no initials enterd");
+        }
+    });
+
+}
+
+
+function displayQuestion() {
+    question = questions[currentQuestionIndex];
+
+    console.log(question.questionText);
+    quizDisplay.classList.remove('hide');
+    questionDisplay.classList.remove('hide');
+
+    questionDisplay.innerText = question.questionText;
+    choice1.innerText = question.ans1;
+    choice1.dataset.index = '1';
+    choice1.classList.remove('hide');
+    choice2.innerText = question.ans2;
+    choice2.dataset.index = '2';
+    choice2.classList.remove('hide');
+    choice3.innerText = question.ans3;
+    choice3.dataset.index = '3';
+    choice3.classList.remove('hide');
+    choice4.innerText = question.ans4;
+    choice4.dataset.index = '4';
+    choice4.classList.remove('hide');
+}
 
 // Countdown for the timer
 function countDown() {
@@ -93,260 +165,86 @@ function countDown() {
         count--;
         countDownDisplay.innerText = "Time: " + count;
 
+        if (isDone) {
+            clearInterval(timer);
+        }
+
         if (!count) {
             alert("Times up");
             clearInterval(timer);
         }
+
     }, 1000);
 
 }
 
 
-
-function genButtons(){
-    for(var i=0; i < questionArray.length;i++){
-        var questionObj = questionArray[i];
-
-        // declare and initialize the new elements
-        var questionText = document.createElement('p');
-        var button1 = document.createElement('button');
-        var button2 = document.createElement('button');
-        var button3 = document.createElement('button');
-        var button4 = document.createElement('button');
-
-
-        // set the values to the elements text
-        questionText.innerText = questionObj.question;
-        button1.innerText =questionObj.ans1;
-        button2.innerText =questionObj.ans2;
-        button3.innerText =questionObj.ans3;
-        button4.innerText =questionObj.ans4;
-
-        // Set the data set to the current quetion index.
-        // Done for ease of hiding and displaying questions later.
-        questionText.dataset.questionIndex = i;
-        button1.dataset.questionIndex = i;
-        button2.dataset.questionIndex = i;
-        button3.dataset.questionIndex = i;
-        button4.dataset.questionIndex = i;
-
-        var elArray = [questionText, button1,button2,button3,button4];
-
-        // Add the elements to the div element in mainDisplay.
-        // optionDisplay.append(questionText);
-        // optionDisplay.append(button1);
-        // optionDisplay.append(button2);
-        // optionDisplay.append(button3);
-        // optionDisplay.append(button4);
-        for ( child of elArray) {
-            optionDisplay.append(child);
-        }
-
-
-
-
-        // // Hide the elements initially
-        // questionText.classList.add('hide');
-        // button1.classList.add('hide');
-        // button2.classList.add('hide');
-        // button3.classList.add('hide');
-        // button4.classList.add('hide');
-        for ( child of elArray) {
-            child.classList.add('hide');
-        }
-
-
-    }
-
-}
-
-
-function genResultScreen(){
-
-    var h2 = document.createElement('h2');
-    var h3 = document.createElement('h3');
-    var div = document.createElement('div');
-    var p = document.createElement('p');
-    var textField = document.createElement("textarea");
-    var button = document.createElement('button');
-
-    h2.innerText = 'All done!';
-    h3.innerText = 'Your final score is ';
-    p.innerText = "Enter initials: ";
-    button.innerText = "Submit";
-
-
-
-
-    mainDisplay.append(h2);
-    mainDisplay.append(h3);
-    div.append(p);
-    div.append(textField);
-    div.append(button);
-    div.style.flexDirection ="row";
-    mainDisplay.append(div);
-
-    // div.classList.add('result');
-    var elArray = [h2,h3,div,p,textField,button];
-
-    for(var i = 0; i< elArray.length; i++){
-        elArray[i].classList.add('result');
-        // elArray[i].classList.add('hide');
-    }
-    hideElements(mainDisplay.querySelectorAll('.result'));
-
-    // for(el of elArray){
-    //     el.dataset.screen = "resultScreen" ;
-    //     el.classList.add('hide') ;
-    //     console.log(el);
-
-    // }
-
-
-
-
-}
-
-
-
-
-// Function that reveals the questions by adding the show class and removing the hide
-// class from the elements in the optionDisplay section of the html.   
-function displayQuestion(questionNumber){
-    
-
-     var answerOptions = optionDisplay.children;
-    
-    for(el of answerOptions){
-        if(el.dataset.questionIndex == questionNumber){
-            el.classList.remove("hide");
-            el.classList.add("show");
-        }
-    }
-
-}
-// Function that hides the questions by removing the show class and adding the hide
-// class from the elements in the optionDisplay section of the html.  
-function hideQuestion(questionNumber){
-    var answerOptions = optionDisplay.children;
-    for(el of answerOptions){
-        if(el.dataset.questionIndex == questionNumber){
-            el.classList.remove("show");
-            el.classList.add("hide");
-        }
-    }
-}
-
-
-
-function resultScreen(score){
-
-    var resultElements = mainDisplay.querySelectorAll('.result');
-
-    // for(var i =0; i< resultElements.length; i++){
-    //     console.log(resultElements[i]);
-    // }
-    // revealElements(resultElements);
-
-
-    var h2 = resultElements[0];
-    var h3 = resultElements[1];
-    var div = resultElements[2];
-    var p = resultElements[3];
-    var initials  = resultElements[4];
-    var button = resultElements[5];
-    // var elArray = [h2,h3,div,p,textField,button];
-
-     
-    
-
-    button = mainDisplay.querySelector("button");
-    button.addEventListener('click', highScoreScreen(score));
-
-}
-
-function highScoreScreen(score){
-
-    // hideElements();
-     
-    
-
-}
-
 function startQuiz() {
-    //Begins the timer
+    mainHeader.classList.add('hide');
+
+    startText.classList.add('hide');
+    startButton.classList.add('hide');
+    questionResult.classList.add('hide');
+
     countDown();
-    //Hides the starting elements
-    for (el of startingElements) {
-        el.classList.add("hide");
-    }       
-
-    genButtons();
-    genResultScreen();
-
-
-    var currentQuestionNumber = 0;
-    var numberCorrect = 0;
-    displayQuestion(currentQuestionNumber);
-
-    optionDisplay.addEventListener('click', function (event) {
-        var selectedAnswer = event.target;
-        var  curQuestion = questionArray[currentQuestionNumber];
-        if(selectedAnswer.innerText === curQuestion.correctAnswer){
-            console.log("CORRECT");
-            numberCorrect++;
-            hideQuestion(currentQuestionNumber);
-            currentQuestionNumber++;
-            
-        }else{
-            console.log("INCORRECT");
-            hideQuestion(currentQuestionNumber);
-            currentQuestionNumber++;
-        }
-
-        if(currentQuestionNumber< questionArray.length){
-            displayQuestion(currentQuestionNumber);
-        }else{
-            resultScreen(numberCorrect);  
-        }
-
-    });
-
-    
+    displayQuestion();
 
 
 
 }
 
 function init() {
-    // any other initializer functions here 
-    setTimer();
-    setHeader();
 
+    currentQuestionIndex = 0;
+    count = 60;
+    isDone = false;
+    numCorrect = 0;
+    question = questions[currentQuestionIndex];
 
-    //event listeners 
-    startButton.addEventListener("click", startQuiz);
+    quizWrap.classList.remove('hide');
+    mainHeader.classList.remove('hide');
+    startText.classList.remove('hide');
+    startButton.classList.remove('hide');
+    questionResult.classList.remove('hide');
+
+    mainHeader.innerText = "Coding Quiz Challenge";
+    startText.innerText = "Try to answer the following code-related quetions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds";
+
+ 
 }
 
-init();
 
 
+startButton.addEventListener('click', startQuiz);
+
+quizDisplay.addEventListener('click', function (event) {
+    checkAnswer(event.target);
+})
+
+// for (el of choices) {
+//     el.addEventListener('click', function () {
+//         checkAnswer(this);
+//     })
+// }
+
+goToHighScore.addEventListener('click', function () {
+    quizDisplay.classList.add('hide');
+    startButton.classList.add('hide');
+    startText.classList.add('hide');
+
+    mainHeader.classList.add('hide');
+    displayHighScoreScreen();
+});
+goBackBtn.addEventListener('click', function () {
+    highScoreScreen.style.display = "none";
+    highScoreScreen.classList.add('hide');
+    init();
+});
+
+clearHighScoreBtn.addEventListener('click', function () {
+    localStorage.clear();
+})
 
 
-
-
-
-// Onpage load initialize event listeners and run
-// any functions that need to process when the page first loads
-
-// initialize out app;
-// init fuction has the event listern button to start the quiz in
-// this case.
-
-//
-
-//maybe an array of functions that loops and the index
-//increases after the button/option has been chosen.
-//
 
 
