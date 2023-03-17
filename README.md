@@ -2,7 +2,7 @@
 
 ### images
 
-![CodeQuiz1.PNG](assets\images\CodeQuiz1.PNG);
+![CodeQuiz1.PNG](./assets\images\CodeQuiz1.PNG);
 ![CodeQuiz2.PNG](assets\images\CodeQuiz2.PNG);
 ![CodeQuiz3.PNG](assets\images\CodeQuiz3.PNG);
 ![CodeQuiz4.PNG](assets\images\CodeQuiz4.PNG);

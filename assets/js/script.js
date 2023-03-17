@@ -66,6 +66,7 @@ function checkAnswer(clickedBtn) {
 
     } else {
         console.log('incorrect');
+        count--;
         currentQuestionIndex++;
         displayResult(false);
     }
@@ -95,7 +96,7 @@ function displayHighScoreScreen() {
     clearHighScoreBtn.innerText = "Clear High Scores";
     highScoreScreen.style.display = "flex";
 
-    scores.innerText = initials + " - " + numCorrect;
+    scores.innerText = initials + " - " + count;
 
 
 
@@ -121,7 +122,7 @@ function displayResultScreen() {
     submit.addEventListener('click', function () {
         if (textArea) {
             initials = initialArea.value;
-            localStorage.setItem(initialArea.value, JSON.stringify(numCorrect));
+            localStorage.setItem(initialArea.value, JSON.stringify(count));
             resultDisplay.classList.add('hide');
             resultDisplay.style.display = "none";
             displayHighScoreScreen();
@@ -160,7 +161,7 @@ function displayQuestion() {
 // Countdown for the timer
 function countDown() {
 
-    var count = 60;
+    count = 60;
     var timer = setInterval(function () {
         count--;
         countDownDisplay.innerText = "Time: " + count;
