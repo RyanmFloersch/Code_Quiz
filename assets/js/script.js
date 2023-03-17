@@ -217,15 +217,15 @@ function init() {
 
 startButton.addEventListener('click', startQuiz);
 
-quizDisplay.addEventListener('click', function (event) {
-    checkAnswer(event.target);
-})
+// quizDisplay.addEventListener('click', function (event) {
+//     checkAnswer(event.target);
+// })
 
-// for (el of choices) {
-//     el.addEventListener('click', function () {
-//         checkAnswer(this);
-//     })
-// }
+for (el of choices) {
+    el.addEventListener('click', function () {
+        checkAnswer(this);
+    })
+}
 
 goToHighScore.addEventListener('click', function () {
     quizDisplay.classList.add('hide');
